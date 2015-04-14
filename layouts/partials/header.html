@@ -1,0 +1,89 @@
+
+  <nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="#" class="brand-logo">{{ .Site.Title }}</a>
+      <ul class="right hide-on-med-and-down">
+        {{ $currentNode := . }}
+        {{ range .Site.Menus.main }}
+          {{ if .HasChildren }}
+            <li class="sub-menu{{if $currentNode.HasMenuCurrent "main" . }} active {{end}}">
+              <a href="javascript:;" class="">
+                  <span>{{ .Name }}</span>
+                  <span class="menu-arrow arrow_carrot-right"></span>
+              </a>
+              <ul class="sub">
+                  {{ range .Children }}
+                    <li{{if $currentNode.IsMenuCurrent "main" . }} class="active"{{end}}><a href="{{.Url}}"> {{ .Name }} </a> </li>
+                  {{ end }}
+              </ul>
+            </li>
+          {{else}}
+            <li>
+              <a href="{{.Url}}" {{if $currentNode.HasMenuCurrent "main" . }} active{{end}}>
+                  <span>{{ .Name }}</span>
+              </a>
+            </li>
+          {{end}}
+        {{end}}
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">                    
+        {{ $currentNode := . }}
+        {{ range .Site.Menus.main }}
+          {{ if .HasChildren }}
+            <li class="sub-menu{{if $currentNode.HasMenuCurrent "main" . }} active {{end}}">
+            <a href="javascript:;" class="">
+                <span>{{ .Name }}</span>
+                <span class="menu-arrow arrow_carrot-right"></span>
+            </a>
+            <ul class="sub">
+                {{ range .Children }}
+                <li{{if $currentNode.IsMenuCurrent "main" . }} class="active"{{end}}><a href="{{.Url}}"> {{ .Name }} </a> </li>
+                {{ end }}
+            </ul>
+          {{else}}
+            <li>
+              <a href="{{.Url}}" {{if $currentNode.HasMenuCurrent "main" . }} active{{end}}>
+                {{ .Pre }}
+                  <span>{{ .Name }}</span>
+              </a>
+            </li>
+          {{end}}
+        {{end}}
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+    </div>
+  </nav>
+
+
+<!-- 
+  <div id="sidebar" class="nav-collapse">
+        <ul class="sidebar-menu">
+          {{ $currentNode := . }}
+          {{ range .Site.Menus.main }}
+              {{ if .HasChildren }}
+
+            <li class="sub-menu{{if $currentNode.HasMenuCurrent "main" . }} active{{end}}">
+            <a href="javascript:;" class="">
+                {{ .Pre }}
+                <span>{{ .Name }}</span>
+                <span class="menu-arrow arrow_carrot-right"></span>
+            </a>
+            <ul class="sub">
+                {{ range .Children }}
+                <li{{if $currentNode.IsMenuCurrent "main" . }} class="active"{{end}}><a href="{{.Url}}"> {{ .Name }} </a> </li>
+                {{ end }}
+            </ul>
+          {{else}}
+            <li>
+            <a class="" href="{{.Url}}">
+                {{ .Pre }}
+                <span>{{ .Name }}</span>
+            </a>
+          {{end}}
+          </li>
+          {{end}}
+            <li> <a href="https://github.com/spf13/hugo/issues" target="blank">Questions and Issues</a> </li>
+            <li> <a href="#" target="blank">Edit this Page</a> </li>
+        </ul>
+    </div> -->

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+        {{ if eq .Url "/" }}
+        <!-- Index -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="{{ .Site.BaseUrl }}">
+        <meta property="og:title" content="{{ .Site.Title }}">
+        {{ range first 1 .Data.Pages }}
+        <meta property="og:description" content="{{ .Site.Title }}">
+        {{ if isset .Params "eyecatch" }}
+        <meta property="og:image" content="{{ .Site.BaseUrl }}/images/{{ .Params.eyecatch }}">
+        {{ end }}
+        {{ end }}
+        {{ else if eq .Url "/post/" }}
+        <!-- Post -->
+        <meta property="og:title" content="All Entries | {{ .Site.Title }}">
+        <meta property="og:url" content="{{ .Site.BaseUrl }}">
+        {{ else if in .Url "/tags/" }}
+        <!-- Category -->
+        <meta property="og:title" content="{{ .Site.Title }}">
+        <meta property="og:url" content="{{ .Site.BaseUrl }}">
+        {{ else }}
+        <!-- Article -->
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="{{ .Title }} | {{ .Site.Title }}">
+        <meta property="og:url" content="{{ .Permalink }}">
+        <meta property="og:description" content="{{ .Site.Title }}">
+        {{ if isset .Params "eyecatch" }}
+        <meta property="og:image" content="{{ .Site.BaseUrl }}/images/{{ .Params.eyecatch }}">
+        {{ end }}
+        {{ end }}
+        <meta property="og:site_name" content="{{ .Site.Title }}">
+        <title>
+        {{ if eq .Url "/" }}
+        {{ .Site.Title }}
+        {{ else if eq .Url "/post/" }}
+        All Entries | {{ .Site.Title }}
+        {{ else if in .Url "/tags/" }}
+        Tags | {{ .Site.Title }}
+        {{ else }}
+        {{ .Title }} | {{ .Site.Title }}
+        {{ end }}
+        </title>
+        <!-- CSS  -->
+        <link href="/font-awesome-4.3.0/css/font-awesome.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    </head>
+    <body>
